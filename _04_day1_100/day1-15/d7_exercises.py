@@ -30,23 +30,27 @@ def main():
     false_guesses = 0
     chosen_word = generate_random_word(word_list)
     blanks = generate_blanks(chosen_word)
+    #debug line to see word randomly picked from list
     print(f"{chosen_word} {blanks}")
     completed = False
     while not completed:
-        char = input("Guess a letter: ").lower()
-        blanks, char_found = check_letter(char, chosen_word, blanks)
         print(blanks)
-        if "_" not in blanks:
-            print("Amazing, you've won!!")
-            completed = True
-        if not char_found:
-            print(hangman[false_guesses])
-            lives -= 1
-            false_guesses += 1
-            print(f"Sorry, {char} is not in the word, you have {lives} lives left")
-            if lives == 0:
-                print("Sorry you lose")
+        char = input("Guess a letter: ").lower()
+        if char in blanks:
+            print(f"You have already guessed {char}")
+        else:
+            blanks, char_found = check_letter(char, chosen_word, blanks)
+            if "_" not in blanks:
+                print("Amazing, you've won!!")
                 completed = True
+            if not char_found:
+                print(hangman[false_guesses])
+                lives -= 1
+                false_guesses += 1
+                print(f"{char} is not in the word, you have {lives} lives left")
+                if lives == 0:
+                    print("Sorry you lose")
+                    completed = True
 
 if __name__ == "__main__":
     main()
