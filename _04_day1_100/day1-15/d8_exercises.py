@@ -7,12 +7,12 @@ def paint_area_calculator(height, width,  coverage):
 
 #check if a number is prime
 def prime_number_checker(n):
-    prime = True
+    is_prime = True
     for i in range(2, n):
         if n % i == 0:
-            prime = False
+            is_prime = False
             break
-    return prime
+    return is_prime
 
 def main():
     choice = -1
