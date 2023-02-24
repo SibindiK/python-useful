@@ -1,0 +1,18 @@
+capital_cities = [
+    {"city": "London",
+     "country": "England",
+     "population": 9046000,
+     },
+    {"city": "Kabul",
+     "country": "Afghanistan",
+     "population": 4012000,
+     },
+    {"city": "Paris",
+     "country": "France",
+     "population": 10901000,
+     },
+    {"city": "Luanda",
+     "country": "Angola",
+     "population": 7774000,
+     },
+]
