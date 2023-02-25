@@ -42,7 +42,7 @@ def compare_populations(active_city, next_city):
 
 
 # play the higher or lower game
-def play_game(cities_selected, active_city):
+def play_game(cities_selected, active_city, score):
     next_city = select_city()
     while was_already_selected(next_city['city'], cities_selected):
         next_city = select_city()
@@ -50,28 +50,31 @@ def play_game(cities_selected, active_city):
     response = input(
         f"is {next_city['city']} population 'higher' or 'lower' than {active_city['city']}\n").lower()
     if response == compare_populations(active_city, next_city):
+        score += 1
         print(
             f"That's correct. {next_city['city']} has a population of {next_city['population']:,}")
         print(
             f"and {active_city['city']} has a population of {active_city['population']:,}")
         cities_selected.append(next_city['city'])
         active_city = next_city
-        play_game(cities_selected, active_city)
+        score = play_game(cities_selected, active_city, score)
     else:
         print(
             f"That's wrong. {next_city['city']} has a population of {next_city['population']:,}")
         print(
             f"and {active_city['city']} has a population of {active_city['population']:,}")
+    return score
 
 
 def main():
     play_again = True
+    score = 0
     while play_again:
         cities_selected = []
         print("Welcome to higher or lower game")
         active_city = select_city()
         cities_selected.append(active_city['city'])
-        play_game(cities_selected, active_city)
+        print(f"Final Score {play_game(cities_selected, active_city, score)}")
         another_round = input(
             "Type 'yes' to play again or 'no' to quit game: ").lower()
         if another_round == 'no':
