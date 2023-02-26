@@ -14,7 +14,6 @@ def get_coins():
 
 def make_coffee(drink, money):
     """make the drink, reduce resources, add to resources money"""
-    #TODO 1. check if there are enough resources to make drink
     change = round(money - MENU[drink]['cost'], 2)
     resources["water"] -= MENU[drink]["ingredients"]["water"]
     resources["coffee"] -= MENU[drink]["ingredients"]["coffee"]
@@ -25,11 +24,24 @@ def make_coffee(drink, money):
     print(f"Here is your {drink}. Enjoy!")
 
 
+def is_enough_resources(drink):
+    """check if there are enough resources to make drink"""
+    if MENU[drink]['ingredients']['water'] > resources['water']:
+        print("Machine does not have enough water")
+        return False
+    elif MENU[drink]['ingredients']['coffee'] > resources['coffee']:
+        print("Machine does not have enough coffee")
+        return False
+    if drink != "espresso":
+        if MENU[drink]['ingredients']['milk'] > resources['milk']:
+            print("Machine does not have enough milk")
+            return False
+    return True
 def print_report():
     """display report on screen"""
-    print(f"Water: {resources['water']}")
-    print(f"Milk: {resources['milk']}")
-    print(f"Coffee: {resources['coffee']}")
+    print(f"Water: {resources['water']}ml")
+    print(f"Milk: {resources['milk']}ml")
+    print(f"Coffee: {resources['coffee']}g")
     print(f"Money: £{round(resources['money'], 2)}")
 
 
@@ -48,7 +60,11 @@ def main():
             if user_money < MENU[drink]['cost']:
                 print(f"Sorry that's not enough money. £{user_money} refunded !!!")
             else:
-                make_coffee(drink, user_money)
+                if is_enough_resources(drink):
+                    make_coffee(drink, user_money)
+                else:
+                    print(f"£{user_money} refunded !!!")
+                    machine_off = True
 
 
 if __name__ == "__main__":
