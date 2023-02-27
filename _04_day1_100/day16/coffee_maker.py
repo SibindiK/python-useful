@@ -10,16 +10,19 @@ class CoffeeMaker:
         print(f"Milk: {self.milk}ml")
         print(f"Coffee: {self.coffee}g")
 
-    #Parameter drink: MenuItem The MenuItem object to make
-    def is_resource_sufficient(self, drink):
+    def is_resource_sufficient(self, drink, c_maker):
         """Returns true when drink order can be made.
         False if ingredients are insufficient"""
+        # Parameter drink: MenuItem The MenuItem object to make
+        is_enough = True
         for resource in drink.ingredients:
-        #TODO 1: iterate through resources
-        #     if self.resource < drink.ingredients[resource]:
-        #         print(f"Not enough {resource}")
-        #         return False
-        # return True
-            print(f"{resource}: {drink.ingredients[resource]}")
-        print(dir(drink))
+            if vars(c_maker)[resource] < drink.ingredients[resource]:
+                print(f"Not enough {resource}")
+                is_enough = False
+        return is_enough
 
+    def make_coffee(self, order):
+        self.water -= order.ingredients['water']
+        self.coffee -= order.ingredients['coffee']
+        self.milk -= order.ingredients['milk']
+        print(f"Here is your {order}. Enjoy!")

@@ -22,8 +22,8 @@ def main():
         else:
             drink = menu.find_drink(choice)
             if drink is not None:
-                #print(coffee_maker.is_resource_sufficient(drink))
-                coffee_maker.is_resource_sufficient(drink)
+                if coffee_maker.is_resource_sufficient(drink, coffee_maker) and money_machine.make_payment(drink.cost):
+                    coffee_maker.make_coffee(drink)
 
 
 if __name__ == "__main__":
