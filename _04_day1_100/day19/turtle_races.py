@@ -5,11 +5,8 @@ screen = Screen()
 colours = ["red", "yellow", "blue", "orange", "purple", "green", "brown", "violet"]
 
 
-def user_choice():
-    pass
-
-
 def create_turtles():
+    """create a list of turtles"""
     turtles = []
     x_pos = -300
     y_pos = 200
@@ -25,9 +22,10 @@ def create_turtles():
 
 
 def move_forward(my_turtle):
+    """move a turtle forward by a random number"""
     my_turtle.pendown()
-    my_turtle.forward(random.randint(10, 20))
-    return my_turtle.xcor(), my_turtle.color()
+    my_turtle.forward(random.randint(0, 10))
+    return my_turtle.xcor(), my_turtle.pencolor()
 
 
 def main():
@@ -42,7 +40,10 @@ def main():
         if winner_status[0] >= x_win_pos:
             is_winner = True
 
-    print(winner_status[1][0])
+    if user_bet == winner_status[1]:
+        print(f"{winner_status[1]} won, Yaay!!")
+    else:
+        print(f"{winner_status[1]} won, You lost!")
 
     screen.exitonclick()
 
