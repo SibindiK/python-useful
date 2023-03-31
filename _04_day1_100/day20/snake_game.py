@@ -40,10 +40,8 @@ def main():
             game_is_on = False
 
         # detect collision with body
-        for segment in snake.segments:
-            if segment == snake.head:
-                pass
-            elif snake.head.distance(segment) < 10:
+        for segment in snake.segments[1:]:
+            if snake.head.distance(segment) < 10:
                 scoreboard.display_game_over()
                 game_is_on = False
 
